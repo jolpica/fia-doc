@@ -11,16 +11,18 @@ from pydantic import (
 )
 
 from .foreign_key import SessionEntry
-
-
+    
 class Classification(BaseModel):
     position: PositiveInt
     is_classified: bool
     status: NonNegativeInt
+    detail: str | None = None
     points: NonNegativeFloat
+    is_eligible_for_points: bool | None = None
+    grid: PositiveInt | None = None
     time: dict[str, str | int] | None
-    laps_completed: NonNegativeInt  # TODO: or positive int? What if retire in lap 1?
     fastest_lap_rank: PositiveInt | None
+    laps_completed: NonNegativeInt  # TODO: or positive int? What if retire in lap 1?
 
     model_config = ConfigDict(extra='forbid')
 
